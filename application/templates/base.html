@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/dashboard/" class="header_nav">Dashboard</a>
+            <a href="/" class="header_nav">Home</a>
+            <a href="/about_me" class="header_nav">About Me</a>
+        </nav>
+    </header>
+    {% block body %}{% endblock %}
+    <footer>
+        <div class="my_links">
+            <h1>My links:</h1>
+            <nav>
+                <a href="https://github.com/xlemnlx" target="_blank" class="footer_nav">GitHub</a>
+                <a href="https://www.linkedin.com/in/emmanuel-darca-35822b211/" target="_blank" class="footer_nav">LinkedIn</a>
+                <a href="mailto:eman.darca86@gmail.com" class="footer_nav">E-mail</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

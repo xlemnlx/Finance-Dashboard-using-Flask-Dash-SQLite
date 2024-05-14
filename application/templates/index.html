@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Finance Tracker</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function()
+        {
+            $("#main_type").change(function()
+                {
+                    var selected_type = $(this).val();
+                    if (selected_type === "Income")
+                    {
+                        $("#income_options").show();
+                        $("#expense_options").hide();
+                        $("#div_submit").show();
+                    }
+                    else if (selected_type === "Expense")
+                    {
+                        $("#income_options").hide();
+                        $("#expense_options").show();
+                        $("#div_submit").show();
+                    }
+                    else
+                    {
+                        $("#income_options").hide();
+                        $("#expense_options").hide();
+                        $("#div_submit").hide();
+                    }
+                });
+        });
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Add new transaction</h1>
+    
+    <form action="/" method="POST" id="add_form" class="outer_form">
+        <label for="main_type">Transaction Type:</label>
+        <select name="main_type" id="main_type">
+            <option value="">-- Select --</option>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+        </select>
+
+        <div id="income_options" style="display: none;">
+            <label for="income_sub_type">Income Source:</label>
+            <select name="income_sub_type" id="income_sub_type">
+                <option value="">-- Select --</option>
+                <option value="Full-time Job">Full-time</option>
+                <option value="Freelancing">Freelancing</option>
+            </select>
+        </div>
+
+        <div id="expense_options" style="display: none;">
+            <label for="expense_sub_type">Expense Source:</label>
+            <select name="expense_sub_type" id="expense_sub_type">
+                <option value="">-- Select --</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Bills">Bills</option>
+                <option value="Leisure">Leisure</option>
+            </select>
+        </div>
+
+        <div id="div_submit" style="display: none;">
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" min="1">
+
+            <br>
+
+            <label for="select_date">Date:</label>
+            <input type="date" name="select_date" id="select_date">
+
+            <br>
+
+            <label for="note">Note:</label>
+            <input type="text" name="note" id="note">
+
+            <br>
+
+            <input type="submit" id="submit_btn" value="Add transaction">
+        </div>
+    </form>
+
+    <h1>Finance Overall Data</h1>
+
+    <div id="import_extract">
+        <form action="/confirm_backup" method="POST" id="form_make_backup" class="inner_form_l1">
+            <button id="extract_to_csv" class="import_extract_btn" onclick="confirm_message()">Make Back-up</button>
+        </form>
+        <script>
+            const hidden_remark = document.createElement("input");
+            hidden_remark.type = "hidden";
+            hidden_remark.name = "backup_note";
+            hidden_remark.id = "backup_note";
+            hidden_remark.value = "";
+            document.getElementById("form_make_backup").appendChild(hidden_remark);
+
+            function confirm_message()
+            {
+                const result = confirm("This will make a backup file.\nAre you sure you want to this?");
+                if (result)
+                {
+                    const backup_note = document.getElementById("backup_note");
+                    const remark = prompt("Please enter a remark for the backup.");
+                    const remark_trimmed = remark.trim()
+
+                    if (remark_trimmed != "")
+                    {
+                        hidden_remark.value = remark_trimmed
+                        alert("Backup has been successfully created!")
+                    }
+                    else{alert("Remark cannot be empty or whitespaces only.")}
+                }
+            }
+        </script>
+        <form action="/backup_list{{file_list}}" id="form_load_backup" class="inner_form_l1">
+            <button id="import_from_csv" class="import_extract_btn">Load Back-up</button>
+        </form>
+    </div>
+
+    {% if transact|length < 1 %}
+
+    <h2>There are no data. Go create some.</h2>
+
+    {% else %}
+
+    <table>
+        <tr>
+            <th>Transaction Type</th>
+            <th>Sub Type</th>
+            <th>Date</th>
+            <th>Value</th>
+            <th>Remarks</th>
+        </tr>
+
+        {% for per_transact in transact %}
+
+            <tr>
+                <td>{{ per_transact.transact_type }}</td>
+                <td>{{ per_transact.transact_sub_type }}</td>
+                <td>{{ per_transact.transact_date.date().strftime("%Y-%m-%d") }}</td>
+                <td>{{ "$" "%0.2f"|format(per_transact.money|float) }}</td>
+                <td>{{ per_transact.note }}</td>
+                <td>
+                    <a href="/delete/{{per_transact.transact_id}}" class="delete_update_btn">Delete</a>
+                    <a href="/update/{{per_transact.transact_id}}" class="delete_update_btn">Update</a>
+                </td>
+            </tr>
+            
+        {% endfor %}
+
+    </table>
+
+    {% endif %}
+</div>
+{% endblock %}

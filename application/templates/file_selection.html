@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Finance Tracker</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Please select a file that will be use to restore the database.</h1>
+
+    {% if file_list|length < 1 %}
+
+    <h2>There are no backup data. Go create some.</h2>
+
+    {% else %}
+    
+    <table>
+        <tr>
+            <th>Backup name:</th>
+            <th>Date Created:</th>
+            <th>Remarks:</th>
+        </tr>
+        {% for row in file_list %}
+        <tr>
+            <td>{{ row.backup_name }}</td>
+            <td>{{ row.backup_date }}</td>
+            <td>{{ row.note }}</td>
+            <td>
+                <form method="POST" action="/load_backup" class="form_file_list">
+                    <input type="hidden" name="selected_button" value="{{ row.backup_name }}">
+                    <button class="restore_btn" type="submit" onclick="return confirm_restore()">Select</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <script>
+            function confirm_restore()
+            {
+                const result = confirm("This file will be use to restore the database.\nAre you sure want to proceed with this?");
+                if (result)
+                    alert("Successfully restored the database. You will redirected to the homepage in three seconds.");
+                    return result;
+            }
+        </script>
+    </table>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

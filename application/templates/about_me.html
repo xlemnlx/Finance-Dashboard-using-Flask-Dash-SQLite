@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Finance Tracker</title>
+{% endblock %}
+
+{% block body %}
+<div id="about_me">
+    <!-- This section is for my display photo, name, course and summary. -->
+    <img id="DisplayPhoto" src="{{ url_for('static', filename='assets/Z5T_0398.jpg') }}" height="200px" width="200px" alt="Formal Photo"/>
+    <h1 id="my_name">Emmanuel Darca</h1>
+    <p><strong>Computer Engineer</strong></p>
+    <p>Python / SQL / Data Analysis / Data Visualization</p>
+    <hr/><br><br>
+    
+    <!-- This section is for summary. -->
+    <h2>About Me:</h2>
+    <p>
+        Hi, I'm <strong>Emman</strong>. To obtain a steady position in an organization that promotes continuous improvement and development that will enhance the skills I already have.
+    </p><br>
+    
+    <!-- This section is for my personal information. -->
+    <h2>Personal Information:</h2>
+    <table class="PITable">
+        <tr>
+            <th class="PITable">Nationality:</th>
+            <td class="PITable">Filipino:</td>
+            <th class="PITable">Contact:</th>
+            <td class="PITable">+639369166213</td>
+        </tr>
+        <tr>
+            <th class="PITable">Home Address:</th>
+            <td class="PITable">Dasmariñas, Cavite, Philippines</td>
+            <th class="PITable">E-Mail:</th>
+            <td class="PITable"><a href="mailto:eman.darca86@gmail.com">eman.darca86@gmail.com</a></td>
+        </tr>
+    </table><br>
+
+    <!-- This section is for my work and intership experience. -->
+    <h2>Work Experience:</h2>
+    <div id="inner_div_l1">
+        <p><strong>Infineon Technologies - Cavite</strong> || February, 2020 to September, 2021<br><strong>Equipment Technician</strong><br><strong>(February 17, 2020 – September 09, 2021)</strong></p>
+        <ul>
+            <li><strong>Microsoft Excel Analysis and Manipulations</strong> (Machines downtime data):
+                <ul>
+                    <li>
+                        Creating VBA to eliminate the process of manually renaming wrong labels and filtering out data so that it is faster to make a report about it.
+                    </li>
+                    <li>
+                        Using formulas and pivots to help in the analysis of the data.
+                    </li>
+                    <li>
+                        Creating data visualizations to highlight which part of the machine is causing the problem and to replace it as soon as possible.
+                    </li>
+                </ul>
+            </li><br>
+            <li><strong>Project – Mold Tool History: Records the purchase date of Mold Tools and the history of cleaning the tools.</strong> (C#.NET and Microsoft SQL):
+                <ul>
+                    <li>
+                        I used C#.NET (Windows Form Application) in Visual Studio Community to create the desktop app.
+                    </li>
+                    <li>
+                        MS SQL was used as the database for the project.
+                    </li>
+                    <li>
+                        Records the purchase date and the dates the tool has been cleaned.
+                    </li>
+                    <li>
+                        Analyze how frequently the tools have to be cleaned based on the recorded data.
+                    </li>
+                    <li>
+                        Make reliable reports to the managers when the tool needs to be replaced.
+                    </li>
+                </ul>
+            </li><br>
+            <li>
+                Other – Created a Python Script to automatically count a specific word / string present in text files from test machines.
+            </li>
+        </ul>
+    </div><br>
+
+    <!-- This section is for my educational background. -->
+    <h2>Education:</h2>
+    <div id="inner_div_l1">
+        <p><strong>Lyceum of the Philippines University - Cavite</strong></p>
+        <ul>
+            <li>
+                Bachelor of Science in Computer Engineering - 2019
+            </li>
+        </ul>
+    </div><br>
+    
+    <!-- This section is for my projects and skills. -->
+    <h2><strong>Skills, Projects, and Certificates:</strong></h2>
+    <div id="inner_div_l1">
+        <p><strong>Projects:</strong></p>
+        <ul>
+            <li>Personal: <strong>Data Scraping and Data Analysis of the TV Game Show “Amazing Saturday” results</strong>
+                <ul>
+                    <li>Used Python and libraries: Selenium, Webdriver-manager, and Pandas to scrape data from this Wikipedia page: <a href="https://en.wikipedia.org/wiki/List_of_DoReMi_Market_episodes">Wikipedia Link</a></li>
+                    <li>Used Pandas to manipulate, clean, and merging of dataframes. While Matplotlib was used to plot the data.</li>
+                    <li>GitHub link for the project: <a href="https://github.com/xlemnlx/Data-Scraping-and-Data-Analysis-of-TV-Show-Amazing-Saturday-results">GitHub Link</a></li>
+                </ul>
+            </li><br>
+            <li>Personal: <strong>Data Plotting Tool – Global Air Pollution Dataset</strong>
+                <ul>
+                    <li>Used Python and libraries: Pandas and Matplotlib to manipulate the dataframe and generate plot according to user’s choices.</li>
+                    <li>Saved the generated plot to user’s “Downloads” folder automatically.</li>
+                    <li>Dataset is from Kaggle: <a href="https://www.kaggle.com/datasets/hasibalmuzdadid/global-air-pollution-dataset">Kaggle Link</a></li>
+                    <li>GitHub link for the project: <a href="https://github.com/xlemnlx/Data-Plotting-Tool-Global-Air-Pollution-Dataset">GitHub Link</a></li>
+                </ul>
+            </li><br>
+            <li>Personal: <strong>Guided Project – Developed a machine learning model using MLPClassifier to automatically detect different exercise types based on sensor data.</strong>
+                <ul>
+                    <li>The model achieved an accuracy of 99.61% on a dataset of 1,292 samples using MLPClassifier from Scikit-Learn’s neural_network module.</li>
+                    <li>Can recognized the five gym exercises: Deadlift, Bench press, Overhead press, Barbell Row, Squat.</li>
+                    <li>Analyzed processed accelerometer and gyroscope data from wearable sensors.</li>
+                    <li>Pandas library was used to efficiently manage and manipulate sensor data in Dataframes.</li>
+                    <li>Utilized Numpy and SciPy libraries for computational tasks, including data analysis, resampling, ang noise reduction.</li>
+                    <li>Matplotlib and Seaborn libraries was used to generate informative visualization and gain insights into the data distribution and relationships.</li>
+                    <li>GitHub link for the project: <a href="https://github.com/xlemnlx/Fitness-Tracker-Machine-Learning-Guided-Project">GitHub Link</a></li>
+                </ul>
+            </li><br>
+            <li>School Projects: <strong>Log-in / Log-out System</strong> and <strong>Inventory System</strong>
+                <ul>
+                    <li>Used C#.NET (Windows Form Application) in Visual Studio Community.</li>
+                    <li>MS SQL was used as the database for the projects.</li>
+                    <li>Arduino Microcontroller was used to control various sensors needed for the projects.</li>
+                </ul>
+            </li><br>
+            <li>School Thesis: <strong>Automated Lift with a PPE Scanner for construction workers.</strong>
+                <ul>
+                    <li>Used C#.NET (Windows Form Application) in Visual Studio Community.</li>
+                    <li>Helping in coding the Arduino Mega 2560 to control multiple relays and read the values of the limit switch and RFID reader.</li>
+                    <li>Helping to do our manuscript and journal documentation of our group thesis.</li>
+                </ul>
+            </li>
+        </ul><br>
+        <p><strong>Skills and Traits:</strong></p>
+        <ul>
+            <li>1.5 years of work experience using C#.NET (Windows Form Apps) and Microsoft SQL.</li>
+            <br>
+            <li>Functional understanding of coding in Python, using Jupyter Notebooks for documentations and Python libraries related to data analysis and data science: Pandas, Numpy, SciPy, Matplotlib, Seaborn, and Scikit-Learn.</li>
+            <br>
+            <li>Functional understanding of using Microsoft SQL and SQLite for making databases, tables, queries for CRUD, and table relationships.</li>
+            <br>
+            <li>Basic understanding of Angular, Next.js, C++, Java, HTML, CSS, JavaScript, VB.NET, ASP .NET – MVC Architecture, version control using Git in Visual Studio and Visual Studio Code.</li>
+            <br>
+            <li>Adept in Microsoft Word, Excel, and PowerPoint.</li>
+            <br>
+            <li>Hardworking</li>
+            <br>
+            <li>Self-starter</li>
+            <br>
+            <li>Willingness to learn / to be taught</li>
+            <br>
+            <li>Good time management</li>
+            <br>
+            <li>Teamwork</li>
+            <br>
+            <li>Accountability</li>
+            <br>
+            <li>Critical thinking</li>
+        </ul><br>
+        <p><strong>Certificates and their links:</strong></p>
+        <table class="cert_tbl">
+            <tr>
+                <th>C#</th>
+                <th>Python</th>
+            </tr>
+            <tr>
+                <td>
+                    <figure>
+                        <img src="{{ url_for('static', filename='assets/fcc_foundational_c#_with_microsoft.jpg') }}" height="180px" width="266px" alt="Foundational C# with Microsoft">
+                        <figcaption><strong>Foundational C# with Microsoft : November, 2023</strong><br><a href="https://www.freecodecamp.org/certification/xleMnlx/foundational-c-sharp-with-microsoft">Certificate Link</a></figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure>
+                        <img src="{{ url_for('static', filename='assets/fcc_scientific_computing_with_python.jpg') }}" height="180px" width="266px" alt="Scientific Computing with Python Certificate">
+                        <figcaption><strong>Scientific Computing with Python: Decemeber, 2023</strong><br><a href="https://www.freecodecamp.org/certification/xleMnlx/scientific-computing-with-python-v7">Certificate Link</a></figcaption>
+                    </figure>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <figure>
+                        <img src="{{ url_for('static', filename='assets/fcc_data_analysis_with_python.png') }}" height="180px" width="266px" alt="Data Analysis with Python: April 22, 2024">
+                        <figcaption><strong>Data Analysis with Python: April 22, 2024</strong><br><a href="https://www.freecodecamp.org/certification/xleMnlx/data-analysis-with-python-v7">Certificate Link</a></figcaption>
+                    </figure>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

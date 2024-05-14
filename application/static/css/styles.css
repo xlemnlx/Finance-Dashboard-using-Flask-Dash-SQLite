@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #e7e7e7;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    font-size: x-large;
+}
+
+a.header_nav, a.footer_nav {
+    display: inline-block;  
+    padding: 10px 20px;   
+    margin: 5px;          
+    text-decoration: none; 
+    color: #fff;          
+    background-color: #007bff; 
+    border: 1px solid #007bff;  
+    border-radius: 5px;    
+    cursor: pointer;     
+}
+  
+a.header_nav:hover, a.footer_nav:hover {
+    background-color: #0069d9;
+}
+
+footer div.my_links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form.outer_form {
+    border: 1px solid #585858;
+    padding: 5px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label, input, select {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+div#import_extract {
+    border: 1px solid #585858;
+    padding: 5px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25%;
+}
+
+table, td, th {
+    border: 1px solid #585858;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+a.delete_update_btn {
+    display: inline-block;
+    padding: 5px 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a.delete_update_btn:hover {
+    background-color: #0069d9;
+}
+
+input#submit_btn, input#update_btn, button.import_extract_btn {
+    font-size: large;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* This part is for the about_me.html */
+
+div#about_me {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 10px 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 0.5cm #262626;
+}
+
+div#inner_div_l1 {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+h1#my_name {
+    text-align: left;
+}
+
+#DisplayPhoto {
+    float: Left;
+    margin-right: 10px;
+}
+
+table.PITable {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+table.PITable, table.PITable th, table.PITable td {
+    text-align: left;
+    border: none;
+    padding: 5px;
+}
+
+table.cert_tbl, table.cert_tbl th, table.cert_tbl td {
+    border: none;
+}
+
+/* This part is for the dashboard */
+
+div#dash_main_div div.dash_inner_div_l1 {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+div.dash_inner_div_l2 {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}

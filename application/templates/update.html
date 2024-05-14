@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Finance Tracker</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Update transaction:</h1>
+
+    <form action="/update/{{transact.transact_id}}" method="POST" id="update_form" class="outer_form">
+        <label for="transact_type">Transaction Type:</label>
+        <label name="main_type" id="transact_type">{{ transact.transact_type }}</label>
+
+        <br>
+
+        <label for="transact_sub_type">Source:</label>
+        <label name="sub_type" id="transact_sub_type">{{ transact.transact_sub_type }}</label>
+
+        <br>
+
+        <label for="amount">Value:</label>
+        <input type="number" name="amount" id="amount" value="{{ '%0.2f'|format(transact.money|float) }}">
+
+        <br>
+
+        <label for="select_date">Date:</label>
+        <label id="select_date">{{ transact.transact_date.strftime("%Y-%m-%d") }}</label>
+        <input type="date" id="date_input">
+        <script>
+            // Access date input and label elements
+            const date_input = document.getElementById("date_input");
+            const date_label = document.getElementById("select_date");
+
+            // Hidden input field to store the selected date
+            const hidden_date_input = document.createElement("input");
+            hidden_date_input.type = "hidden";
+            hidden_date_input.name = "select_date";  // This is the key used in the view function
+            hidden_date_input.value = date_label.textContent
+            document.getElementById("update_form").appendChild(hidden_date_input);  // Adjust ID if needed
+
+            // Function to update label and hidden input based on input change
+            function update_date_and_hidden_input() 
+            {
+                const selected_date = date_input.value;
+                date_label.textContent = selected_date;
+                hidden_date_input.value = selected_date;  // Set selected date in hidden field
+            }
+
+            // Attach event listener to input
+            date_input.addEventListener("change", update_date_and_hidden_input);
+        </script>
+
+        <br>
+
+        <label for="note">Remakrs:</label>
+        <input type="text" name="note" id="note" value="{{ transact.note }}">
+
+        <br>
+
+        <input type="submit" value="Update" id="update_btn">
+    </form>
+
+</div>
+{% endblock %}
