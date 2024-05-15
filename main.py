@@ -4,4 +4,4 @@ from application import init_app
 app: Flask = init_app() # type: ignore
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host='0.0.0.0', debug=False)
