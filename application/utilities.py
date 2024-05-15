@@ -1,3 +1,4 @@
+from .dashboard.functions import main
 from datetime import datetime
 import pandas as pd
 import sqlite3
@@ -183,4 +184,45 @@ def import_csv_to_sql(file_name: str) -> None:
         print(f"Error: {type(e).__name__}")
     finally:
         conn.close()
+
+def amount_values() -> dict:
+    _, _, _, df_con, _, _ = main()
+
+    income: int = 0
+    expense: int = 0
+
+    for _, row in df_con.iterrows():
+        
+        handler = row["main_type"]
+        money: int = 0
+        
+        if handler == "Income":
+            money = int(row["total_amount"])
+            income += money
+        else:
+            money = int(row["total_amount"])
+            expense += money
+
+    current_savings: str = str(income - expense)
+    total_income: str = str(income)
+    total_expense: str = str(expense)
+
+    amount_dict: dict = {"savings" : current_savings, "income" : total_income, "expense" : total_expense}
+    formatted_amount_dict: dict = {}
+
+    for key, amount in amount_dict.items():
+        rev_amount = amount[::-1]
+        if len(rev_amount) > 3:
+            fix_format: list = []
+            count: int = 1
+            for num in rev_amount:
+                fix_format.append(num)
+                if count == 3 or count == 6:
+                    fix_format.append(",")
+                count += 1
+            rev_fix_amount = "".join(fix_format)
+            fix_amount = rev_fix_amount[::-1]
+            formatted_amount_dict[key] = fix_amount
+    
+    return formatted_amount_dict
 

@@ -2,7 +2,7 @@
 from flask import render_template, redirect, request
 from flask import current_app as server
 from . import db
-from .utilities import backup_list, export_sql_to_csv, import_csv_to_sql
+from .utilities import backup_list, export_sql_to_csv, import_csv_to_sql, amount_values
 from .models import Finance_Table
 from datetime import datetime
 from time import sleep
@@ -45,7 +45,8 @@ def index():
         
     else:
         transact = Finance_Table.query.order_by(Finance_Table.transact_date).all()
-        return render_template("index.html", transact=transact)
+        amount_vals = amount_values() # NEW
+        return render_template("index.html", transact=transact, amount_vals=amount_vals) # SAME HERE
 
 @server.route("/delete/<int:transact_id>")
 def delete(transact_id):

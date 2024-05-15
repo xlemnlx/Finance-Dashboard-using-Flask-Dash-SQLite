@@ -85,6 +85,21 @@
 
     <h1>Finance Overall Data</h1>
 
+    <table>
+        <tr>
+            <th>Current Savings:</th>
+            <th>Total Earnings:</th>
+            <th>Total Expenses:</th>
+        </tr>
+
+        <tr>
+            <td>${{ amount_vals.savings }}</td>
+            <td>${{ amount_vals.income }}</td>
+            <td>${{ amount_vals.expense }}</td>
+        </tr>
+
+    </table>
+
     <div id="import_extract">
         <form action="/confirm_backup" method="POST" id="form_make_backup" class="inner_form_l1">
             <button id="extract_to_csv" class="import_extract_btn" onclick="confirm_message()">Make Back-up</button>
