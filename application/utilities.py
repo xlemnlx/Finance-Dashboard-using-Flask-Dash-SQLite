@@ -142,18 +142,36 @@ def export_sql_to_csv(note: str) -> None:
     _, current_datetime = datetime_formatter()
     
     try:
-        conn = sqlite3.connect(db_path)
         
-        with open(f"{base_path}\\static\\schema\\backup_table_creation.sql") as f:
-            conn.executescript(f.read())
+        try:
+            conn = sqlite3.connect(db_path)
+        except Exception as e:
+            print(f"DB file location problem: Error: {type(e).__name__}")
         
-        select_query = "SELECT * FROM finance__table;"
-        df = pd.read_sql(select_query, conn)
+        try:
+            backup_table_schema = f"{base_path}/static/schema/backup_table_creation.sql"
+            print(backup_table_schema)
+            with open(backup_table_schema) as f:
+                conn.executescript(f.read())
+        except Exception as e:
+            print(f"Backup schema problem: Error: {type(e).__name__}")
         
-        cursor = conn.cursor()
-        insert_query = "INSERT INTO backup_table (backup_name, backup_date, note) VALUES (?, ?, ?);"
-        cursor.execute(insert_query, (backup_file_name, current_datetime, note))
-        conn.commit()
+        try:
+            select_query = "SELECT * FROM finance__table;"
+            df = pd.read_sql(select_query, conn)
+        except Exception as e:
+            print(f"Pandas read_sql problem: Error: {type(e).__name__}")
+        
+        try:
+            cursor = conn.cursor()
+            insert_query = "INSERT INTO backup_table (backup_name, backup_date, note) VALUES (?, ?, ?);"
+            cursor.execute(insert_query, (backup_file_name, current_datetime, note))
+            conn.commit()
+        except Exception as e:
+            print(f"Inserting values to backup_table problem: Error: {type(e).__name__}")
+        
+        print(f"Successfully created a backup file and inserted the data to backup_table")
+        
     except Exception as e:
         print(f"Error: {type(e).__name__}")
     finally:
@@ -163,7 +181,7 @@ def export_sql_to_csv(note: str) -> None:
         df_fixed = date_fixer(df)
         df_fixed.to_csv(backup_path, index=False)
     except Exception as e:
-        print(f"There is some error. Error: {type(e).__name__}")
+        print(f"There is some error exporting the dataframe to a csv file. Error: {type(e).__name__}")
 
 def import_csv_to_sql(file_name: str) -> None:
     """Restores the data of the database table using the csv backup file that the user picked. 
@@ -172,38 +190,21 @@ def import_csv_to_sql(file_name: str) -> None:
         file_name (str): file name of the csv file to be use to restore the data of the database table.
     """
     base_path, db_path, _, backup_folder, _ = path_generator()
-    print(base_path)
-    print(db_path)
-    print(backup_folder)
     
     try:
         
-        try:
-            conn = sqlite3.connect(db_path)
-        except Exception as e:
-            print(f"DB connection problem. Error {type(e).__name__}")
+        conn = sqlite3.connect(db_path)
         
-        try:
-            # finance_table_schema = f"{base_path}\\static\\schema\\finance__table_creation.sql"
-            finance_table_schema = f"{base_path}/static/schema/finance__table_creation.sql"
-            print(finance_table_schema)
-            with open (finance_table_schema) as f:
-                conn.executescript(f.read())
-        except Exception as e:
-            print(f"Schema file problem. Error {type(e).__name__}")
+        finance_table_schema = f"{base_path}/static/schema/finance__table_creation.sql"
+        with open (finance_table_schema) as f:
+            conn.executescript(f.read())
         
-        try:
-            # backup_filename_path = f"{backup_folder}\\{file_name}"
-            backup_filename_path = f"{backup_folder}/{file_name}"
-            print(backup_filename_path)
-            df = pd.read_csv(backup_filename_path)
-        except Exception as e:
-            print(f"Pandas read_csv problem. Error {type(e).__name__}")
+        backup_filename_path = f"{backup_folder}/{file_name}"
+        df = pd.read_csv(backup_filename_path)
         
-        try:
-            df.to_sql("finance__table", conn, if_exists="append", index=False)
-        except Exception as e:
-            print(f"Pandas df.to_sql problem. Error {type(e).__name__}")
+        df.to_sql("finance__table", conn, if_exists="append", index=False)
+        
+        print(f"Successfully restored the database using {file_name}.")
         
     except Exception as e:
         print(f"Error: {type(e).__name__}")
