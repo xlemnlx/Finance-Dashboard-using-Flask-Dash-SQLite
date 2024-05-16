@@ -172,6 +172,9 @@ def import_csv_to_sql(file_name: str) -> None:
         file_name (str): file name of the csv file to be use to restore the data of the database table.
     """
     base_path, db_path, _, backup_folder, _ = path_generator()
+    print(base_path)
+    print(base_path)
+    print(backup_folder)
     
     try:
         conn = sqlite3.connect(db_path)
