@@ -173,16 +173,32 @@ def import_csv_to_sql(file_name: str) -> None:
     """
     base_path, db_path, _, backup_folder, _ = path_generator()
     print(base_path)
-    print(base_path)
+    print(db_path)
     print(backup_folder)
     
     try:
-        conn = sqlite3.connect(db_path)
-        with open (f"{base_path}\\static\\schema\\finance__table_creation.sql") as f:
-            conn.executescript(f.read())
         
-        df = pd.read_csv(f"{backup_folder}\\{file_name}")
-        df.to_sql("finance__table", conn, if_exists="append", index=False)
+        try:
+            conn = sqlite3.connect(db_path)
+        except Exception as e:
+            print(f"DB connection problem. Error {type(e).__name__}")
+        
+        try:
+            with open (f"{base_path}\\static\\schema\\finance__table_creation.sql") as f:
+                conn.executescript(f.read())
+        except Exception as e:
+            print(f"Schema file problem. Error {type(e).__name__}")
+        
+        try:
+            df = pd.read_csv(f"{backup_folder}\\{file_name}")
+        except Exception as e:
+            print(f"Pandas read_csv problem. Error {type(e).__name__}")
+        
+        try:
+            df.to_sql("finance__table", conn, if_exists="append", index=False)
+        except Exception as e:
+            print(f"Pandas df.to_sql problem. Error {type(e).__name__}")
+        
     except Exception as e:
         print(f"Error: {type(e).__name__}")
     finally:
