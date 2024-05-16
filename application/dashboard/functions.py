@@ -234,28 +234,3 @@ def main() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.D
     
     return df_fixed, df_income, df_expense, df_val_con, df_val_con_income, df_val_con_expense
 
-# region CURRENTLY NOT BEING USED... WILL BE RETAINING FOR THE MEANTIME INCASE I MIGHT NEED IT.
-# def month_reordering(dataframe: pd.DataFrame) -> pd.DataFrame:
-#     """Return a dataframe with months in ordered list.
-
-#     Args:
-#         dataframe (pd.DataFrame): dataframe with jumbled months.
-
-#     Returns:
-#         pd.DataFrame: dataframe with months in ordered list.
-#     """
-#     month_ordered = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    
-#     months_avail: list = list(dataframe["month"].unique())
-#     ordered_data: list = []
-    
-#     for month in month_ordered:
-#         if month in months_avail:
-#             df_month = dataframe[dataframe["month"] == month]
-#             for _, row in df_month.iterrows():
-#                 ordered_data.append(row.to_dict())
-    
-#     df_ordered = pd.DataFrame(ordered_data)
-#     return df_ordered
-# endregion
-

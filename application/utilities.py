@@ -5,6 +5,11 @@ import sqlite3
 import os
 
 def datetime_formatter() -> tuple:
+    """datetime formatter and generator.
+
+    Returns:
+        tuple: formatted_datetime: str, current_datetime: datetime
+    """
     current_datetime = datetime.now()
     formatted_datetime = current_datetime.strftime("%Y%m%d_%H%M%S")
     
@@ -32,7 +37,14 @@ def path_generator() -> tuple[str, str, str, str, str]:
     return base_path, db_path, backup_path, backup_folder, backup_file_name
 
 def date_fixer(dataframe: pd.DataFrame) -> pd.DataFrame:
-    
+    """Removes the time in the datetime since its just "00:00:00.0000"
+
+    Args:
+        dataframe (pd.DataFrame): raw dataframe
+
+    Returns:
+        pd.DataFrame: fixed dataframe
+    """
     cleaned_table: list = []
     
     for _, row in dataframe.iterrows():
@@ -89,16 +101,6 @@ def string_formatter(file_name: str, creation_date: str) -> tuple[str, str]:
     
     return formatted_name, formatted_date
 
-def db_creation() -> None:
-    _, db_path, _, _, _ = path_generator()
-    
-    try:
-        conn = sqlite3.connect(db_path) # This will create the database file if it doesn't exist yet. Otherwise, it will just connect and disconnect.
-    except Exception as e:
-        print(f"Make sure that the path exists. Error: {type(e).__name__}")
-    finally:
-        conn.close()
-
 def backup_list() -> list: 
     """Retrieves the list of backup file names, date created, and user remarks. 
 
@@ -146,7 +148,6 @@ def export_sql_to_csv(note: str) -> None:
         conn = sqlite3.connect(db_path)
         
         backup_table_schema = f"{base_path}/static/schema/backup_table_creation.sql"
-        print(backup_table_schema)
         with open(backup_table_schema) as f:
             conn.executescript(f.read())
         
@@ -200,6 +201,11 @@ def import_csv_to_sql(file_name: str) -> None:
         conn.close()
 
 def amount_values() -> dict:
+    """Sums up value for Income and Expense, substract them, and insert to a dictionary. To be displayed in the index.
+
+    Returns:
+        dict: keys: "savings", "income", "expense"
+    """
     _, _, _, df_con, _, _ = main()
 
     income: int = 0

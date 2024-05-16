@@ -15,7 +15,5 @@ class Finance_Table(db.Model):
     
     @classmethod
     def init_db(cls):
-        # db.init_app(server)
-        # with server.app_context():
         db.create_all()
 

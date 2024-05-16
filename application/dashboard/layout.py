@@ -29,7 +29,7 @@ def init_layout(app: Dash):
             Col(dcc.Graph(id="pie_income_content")),
             Col(dcc.Graph(id="pie_expense_content"))
         ])),
-        Row(html.Br()), # CURRENTLY HERE
+        Row(html.Br()),
         Row(html.Div(className="dash_inner_div_l2", children=[
             Col(html.Div(children=[
                 Col(html.P(children="Filter by Year:")),

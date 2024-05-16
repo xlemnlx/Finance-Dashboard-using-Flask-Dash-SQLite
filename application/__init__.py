@@ -17,10 +17,6 @@ def init_app():
         # Import Dash Application: Example:
         # from .dashboard.dashboard import init_dashboard
         # server = init_dashboard(server)
-        """
-        For this one, I am still unsure if its "server = " or
-        "app = "... Will know once I am doing this for real.
-        """
         from .dashboard import init_dashapp
         server = init_dashapp(server)
         
