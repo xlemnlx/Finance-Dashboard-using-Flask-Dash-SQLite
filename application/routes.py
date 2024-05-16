@@ -92,7 +92,6 @@ def confirm_backup():
             backup_note = request.form["backup_note"]
             if backup_note != "":
                 export_sql_to_csv(backup_note)
-                print("Backup has been created!")
         except Exception as e:
             print(f"Make sure that the function is working properly. Error: {type(e).__name__}")
         finally:
