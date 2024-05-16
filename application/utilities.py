@@ -184,13 +184,19 @@ def import_csv_to_sql(file_name: str) -> None:
             print(f"DB connection problem. Error {type(e).__name__}")
         
         try:
-            with open (f"{base_path}\\static\\schema\\finance__table_creation.sql") as f:
+            # finance_table_schema = f"{base_path}\\static\\schema\\finance__table_creation.sql"
+            finance_table_schema = f"{base_path}/static/schema/finance__table_creation.sql"
+            print(finance_table_schema)
+            with open (finance_table_schema) as f:
                 conn.executescript(f.read())
         except Exception as e:
             print(f"Schema file problem. Error {type(e).__name__}")
         
         try:
-            df = pd.read_csv(f"{backup_folder}\\{file_name}")
+            # backup_filename_path = f"{backup_folder}\\{file_name}"
+            backup_filename_path = f"{backup_folder}/{file_name}"
+            print(backup_filename_path)
+            df = pd.read_csv(backup_filename_path)
         except Exception as e:
             print(f"Pandas read_csv problem. Error {type(e).__name__}")
         
